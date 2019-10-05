@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  db.:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: escolaInformatica
+      MYSQL_DATABASE: escolaInformatica
+      MYSQL_USER: escolaInformatica
+      MYSQL_PASSWORD: escolaInformatica
+    ports:
+      - "3309:3306"
