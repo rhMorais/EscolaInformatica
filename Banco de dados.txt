@@ -1,0 +1,50 @@
+
+materia n x 1 professor 
+
+curso 	n x n materia
+
+turma 	n x 1 curso
+
+aluno 	n x n turma
+
+Banco de dados
+
+	Professor {
+		Id
+		Nome
+	}
+
+	Materia {
+		Id
+		Descricao		
+		Codigo_Professor
+	}
+
+	Curso {
+		Id
+		Descricao	
+	}
+
+	Curso_Materia {
+		Id_Curso
+		Id_Materia
+	}
+
+	Turma {
+		Id
+		Codigo_Curso
+		Periodo
+	}
+
+	Aluno {
+		Id
+		Nome
+		Data_Nascimento
+		CPF	
+	}
+
+	Turma_Aluno {
+		Id_Turma
+		Id_Aluno
+	}
+

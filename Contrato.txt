@@ -1,0 +1,36 @@
+
+
+Contrato classes
+
+	Professor {
+		int id,
+		string nome
+	}
+	
+	Materia {
+		int id,
+		string descricao,
+		Professor professor
+	}
+	
+	Curso {
+		int id,
+		string descricao,
+		List<Materia> materias 
+	}
+	
+	Aluno {
+		int id,
+		string nome,
+		Datetime data_nascimento,
+		decimal cpf
+	}
+	
+	Turma {
+		int id,
+		string periodo,
+		Curso curso,
+		List<Aluno> alunos
+	}
+	
+	
