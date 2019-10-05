@@ -46,6 +46,5 @@ public class ProfessorBusinessImpl implements ProfessorBusiness {
     @Override
     public void delete(int id) {
         professorRepository.deleteById(id);
-        return;
     }
 }

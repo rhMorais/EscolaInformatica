@@ -48,6 +48,6 @@ public class ProfessorController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable int id){
         professorBusiness.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Professor excluído com sucesso");
+        return ResponseEntity.status(HttpStatus.OK).body(new Response("Professor excluído com sucesso"));
     }
 }
