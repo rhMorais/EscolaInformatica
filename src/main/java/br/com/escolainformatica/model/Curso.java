@@ -1,8 +1,11 @@
 package br.com.escolainformatica.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table
@@ -11,23 +14,23 @@ public class Curso implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(nullable = false)
     private String descricao;
 
     @ManyToMany
-    @JoinTable( name = "Curso_Materia",
-                joinColumns = @JoinColumn(  name = "id_curso",
-                                            foreignKey = @ForeignKey(name = "Curso_Curso_Materia_FK")),
-                inverseJoinColumns = @JoinColumn(   name = "id_materia",
-                                                    foreignKey = @ForeignKey(name="Materia_Curso_Materia_FK")))
+    @JoinTable(name = "materia_cursos",
+            joinColumns = @JoinColumn(name = "id_curso"),
+            inverseJoinColumns = @JoinColumn(name = "id_materia")
+    )
     private List<Materia> materias;
 
     @OneToMany(mappedBy = "curso")
+    @JsonIgnore
     private List<Turma> turmas;
 
-    public Curso(int id, String descricao, List<Materia> materias) {
+    public Curso(Integer id, String descricao, List<Materia> materias) {
         this.id = id;
         this.descricao = descricao;
         this.materias = materias;
@@ -36,11 +39,11 @@ public class Curso implements Serializable {
     public Curso() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -60,7 +63,22 @@ public class Curso implements Serializable {
         this.materias = materias;
     }
 
+    public void addMateria(Materia materia) {
+        verificaMaterias();
+        materias.add(materia);
+    }
+
+    public void removeMateria(Materia materia) {
+        verificaMaterias();
+        materias.remove(materia);
+    }
+
     public List<Turma> getTurmas() {
         return turmas;
+    }
+
+    private void verificaMaterias(){
+        if (materias == null)
+            materias = new ArrayList<>();
     }
 }

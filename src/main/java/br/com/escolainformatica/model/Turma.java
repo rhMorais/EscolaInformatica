@@ -11,7 +11,7 @@ public class Turma implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(nullable = false)
     private String periodo;
@@ -21,26 +21,26 @@ public class Turma implements Serializable {
     private Curso curso;
 
     @ManyToMany
-    @JoinTable(name = "Turma_Aluno",
-            joinColumns = @JoinColumn(name = "id_turma", foreignKey = @ForeignKey(name = "Turma_Turma_Aluno_FK")),
-            inverseJoinColumns = @JoinColumn(name = "id_aluno", foreignKey = @ForeignKey(name = "Aluno_TurmaAluno_FK")))
+    @JoinTable(name = "aluno_turmas",
+            joinColumns = @JoinColumn(name = "id_aluno"),
+            inverseJoinColumns = @JoinColumn(name = "id_turma"))
     private List<Aluno> alunos;
 
     public Turma() {
     }
 
-    public Turma(int id, String periodo, Curso curso, List<Aluno> alunos) {
+    public Turma(Integer id, String periodo, Curso curso, List<Aluno> alunos) {
         this.id = id;
         this.periodo = periodo;
         this.curso = curso;
         this.alunos = alunos;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -25,7 +25,10 @@ public class ProfessorBusinessImpl implements ProfessorBusiness {
     }
 
     @Override
-    public Professor findOne(int id) {
+    public Professor findOne(Integer id) {
+        if (!professorRepository.existsById(id))
+            throw new NotFoundException();
+
         return professorRepository.findById(id).get();
     }
 
@@ -35,7 +38,7 @@ public class ProfessorBusinessImpl implements ProfessorBusiness {
     }
 
     @Override
-    public Professor save(int id, Professor professor){
+    public Professor save(Integer id, Professor professor){
         if (!professorRepository.existsById(id))
             throw new NotFoundException();
 
@@ -44,7 +47,7 @@ public class ProfessorBusinessImpl implements ProfessorBusiness {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         professorRepository.deleteById(id);
     }
 }

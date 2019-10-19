@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface AlunoBusiness {
     List<Aluno> findAll(Pageable pageable);
-    Aluno findOne(int id);
+    Aluno findOne(Integer id);
     List<Aluno> findAllByName(Pageable pageable, String nome);
     Aluno save(Aluno aluno);
-    Aluno save(int id, Aluno aluno);
-    void delete(int id);
+    Aluno save(Integer id, Aluno aluno);
+    void delete(Integer id);
 }

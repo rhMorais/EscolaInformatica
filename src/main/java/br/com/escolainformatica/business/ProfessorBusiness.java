@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface ProfessorBusiness {
     List<Professor> findAll(Pageable pageable);
-    Professor findOne(int id);
+    Professor findOne(Integer id);
     Professor save(Professor professor);
-    Professor save(int id, Professor professor);
-    void delete(int id);
+    Professor save(Integer id, Professor professor);
+    void delete(Integer id);
 }

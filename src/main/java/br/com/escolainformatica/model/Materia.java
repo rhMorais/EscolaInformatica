@@ -1,5 +1,7 @@
 package br.com.escolainformatica.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -11,7 +13,7 @@ public class Materia implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(nullable = false)
     private String descricao;
@@ -22,23 +24,28 @@ public class Materia implements Serializable {
                 nullable = false)
     private Professor professor;
 
-    @ManyToMany(mappedBy = "materias", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "materias")
+    @JsonIgnore
     private List<Curso> cursos;
 
-    public Materia(int id, String descricao, Professor professor) {
+    public Materia(Integer id, String descricao, Professor professor) {
         this.id = id;
         this.descricao = descricao;
         this.professor = professor;
     }
 
+    public Materia(Integer id){
+        this.id = id;
+    }
+
     public Materia() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

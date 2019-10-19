@@ -11,11 +11,11 @@ public class Professor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @Column(nullable = false)
     private String nome;
 
-    public Professor(int id, String nome) {
+    public Professor(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
     }
@@ -23,11 +23,11 @@ public class Professor implements Serializable {
     public Professor() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -16,26 +16,22 @@ import java.util.List;
 @RequestMapping("/v1/alunos")
 public class AlunoController {
 
-    AlunoBusiness alunoBusiness;
-
     @Autowired
-    public AlunoController(AlunoBusiness alunoBusiness) {
-        this.alunoBusiness = alunoBusiness;
-    }
+    AlunoBusiness alunoBusiness;
 
     @GetMapping
     public ResponseEntity<List<Aluno>> findAll(@PageableDefault(size = 10) Pageable pageable){
         return ResponseEntity.ok(alunoBusiness.findAll(pageable));
     }
 
-    @GetMapping
+    @GetMapping("/nome")
     public ResponseEntity<List<Aluno>> findAllByName(@PageableDefault(size = 10) Pageable pageable,
                                                      @RequestParam String nome){
         return ResponseEntity.ok(alunoBusiness.findAllByName(pageable, nome));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Aluno> findOne(@PathVariable int id){
+    public ResponseEntity<Aluno> findOne(@PathVariable Integer id){
         return ResponseEntity.ok(alunoBusiness.findOne(id));
     }
 
@@ -47,13 +43,13 @@ public class AlunoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Aluno> put(@PathVariable int id, @RequestBody Aluno aluno){
+    public ResponseEntity<Aluno> save(@PathVariable Integer id, @RequestBody Aluno aluno){
         return ResponseEntity.ok(alunoBusiness.save(id, aluno));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable int id){
+    public ResponseEntity delete(@PathVariable Integer id){
         alunoBusiness.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).body(new Response("Materia excluída com sucesso"));
+        return ResponseEntity.status(HttpStatus.OK).body(new Response("Aluno excluído com sucesso"));
     }
 }

@@ -13,12 +13,8 @@ import java.util.List;
 @Service
 public class AlunoBusinessImpl implements AlunoBusiness {
 
-    AlunoRepository alunoRepository;
-
     @Autowired
-    public AlunoBusinessImpl(AlunoRepository alunoRepository) {
-        this.alunoRepository = alunoRepository;
-    }
+    AlunoRepository alunoRepository;
 
     @Override
     public List<Aluno> findAll(Pageable pageable) {
@@ -26,13 +22,16 @@ public class AlunoBusinessImpl implements AlunoBusiness {
     }
 
     @Override
-    public Aluno findOne(int id) {
+    public Aluno findOne(Integer id) {
+        if (!alunoRepository.existsById(id))
+            throw new NotFoundException();
+
         return alunoRepository.findById(id).get();
     }
 
     @Override
     public List<Aluno> findAllByName(Pageable pageable, String nome){
-        return alunoRepository.findByName(pageable, nome);
+        return alunoRepository.findAllByNomeContains(pageable, nome);
     }
 
     @Override
@@ -41,7 +40,7 @@ public class AlunoBusinessImpl implements AlunoBusiness {
     }
 
     @Override
-    public Aluno save(int id, Aluno aluno) {
+    public Aluno save(Integer id, Aluno aluno) {
         if (!alunoRepository.existsById(id))
             throw new NotFoundException();
 
@@ -50,7 +49,7 @@ public class AlunoBusinessImpl implements AlunoBusiness {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         alunoRepository.deleteById(id);
     }
 }

@@ -16,12 +16,8 @@ import java.util.List;
 @RequestMapping("/v1/professores")
 public class ProfessorController {
 
-    ProfessorBusiness professorBusiness;
-
     @Autowired
-    public ProfessorController(ProfessorBusiness professorBusiness) {
-        this.professorBusiness = professorBusiness;
-    }
+    ProfessorBusiness professorBusiness;
 
     @GetMapping
     public ResponseEntity<List<Professor>> findAll(@PageableDefault(size = 10)Pageable pageable){
@@ -29,7 +25,7 @@ public class ProfessorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Professor> findOne(@PathVariable int id){
+    public ResponseEntity<Professor> findOne(@PathVariable Integer id){
         return ResponseEntity.ok(professorBusiness.findOne(id));
     }
 
@@ -41,12 +37,12 @@ public class ProfessorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Professor> put(@PathVariable int id, @RequestBody Professor professor){
+    public ResponseEntity<Professor> save(@PathVariable Integer id, @RequestBody Professor professor){
         return ResponseEntity.ok(professorBusiness.save(id, professor));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable int id){
+    public ResponseEntity delete(@PathVariable Integer id){
         professorBusiness.delete(id);
         return ResponseEntity.status(HttpStatus.OK).body(new Response("Professor excluído com sucesso"));
     }
