@@ -1,0 +1,22 @@
+
+:: Aula Java Spring ::
+
+- Site para facilitar o set up de um projeto
+	https://start.spring.io/
+	
+
+- Clean do maven
+	mvn clean
+	
+- Build do maven
+	- mvn clean install
+	
+- Ajustar versão do java
+	- Botao direito no projeto
+		Open module settings
+		
+
+- Docker
+	docker-compose up -d: Subir docker
+	docker container ls -a: listar dockers na maquina
+	
