@@ -50,6 +50,6 @@ public class AlunoController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Integer id){
         alunoBusiness.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).body(new Response("Aluno excluído com sucesso"));
+        return ResponseEntity.status(HttpStatus.OK);
     }
 }

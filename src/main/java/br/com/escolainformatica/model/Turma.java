@@ -67,4 +67,19 @@ public class Turma implements Serializable {
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
     }
+
+    public void addAluno(Aluno aluno) {
+        verificaAlunos();
+        alunos.add(aluno);
+    }
+
+    public void removeAluno(Aluno aluno) {
+        verificaAlunos();
+        alunos.remove(aluno);
+    }
+
+    private void verificaAlunos(){
+        if (alunos == null)
+            alunos = new ArrayList<>();
+    }
 }

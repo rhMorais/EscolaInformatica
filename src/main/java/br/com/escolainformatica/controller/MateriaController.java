@@ -45,6 +45,6 @@ public class MateriaController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Integer id){
         materiaBusiness.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).body(new Response("Materia excluída com sucesso"));
+        return ResponseEntity.status(HttpStatus.OK);
     }
 }

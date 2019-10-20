@@ -45,7 +45,7 @@ public class CursoController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Integer id){
         cursoBusiness.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).body(new Response("Curso excluído com sucesso"));
+        return ResponseEntity.status(HttpStatus.OK);
     }
 
     @PostMapping("/{id}/materias")
