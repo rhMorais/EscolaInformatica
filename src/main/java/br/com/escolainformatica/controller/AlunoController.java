@@ -3,6 +3,7 @@ package br.com.escolainformatica.controller;
 import br.com.escolainformatica.business.AlunoBusiness;
 import br.com.escolainformatica.exception.Response;
 import br.com.escolainformatica.model.Aluno;
+import br.com.escolainformatica.model.AlunoTurma;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -25,8 +26,8 @@ public class AlunoController {
     }
 
     @GetMapping("/nome")
-    public ResponseEntity<List<Aluno>> findAllByName(@PageableDefault(size = 10) Pageable pageable,
-                                                     @RequestParam String nome){
+    public ResponseEntity<List<AlunoTurma>> findAllByName(@PageableDefault(size = 10) Pageable pageable,
+                                                          @RequestParam String nome){
         return ResponseEntity.ok(alunoBusiness.findAllByName(pageable, nome));
     }
 
@@ -37,9 +38,7 @@ public class AlunoController {
 
     @PostMapping
     public ResponseEntity<Aluno> save(@RequestBody Aluno aluno){
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(alunoBusiness.save(aluno));
+        return ResponseEntity.status(HttpStatus.CREATED).body(alunoBusiness.save(aluno));
     }
 
     @PutMapping("/{id}")
@@ -50,6 +49,6 @@ public class AlunoController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Integer id){
         alunoBusiness.delete(id);
-        return ResponseEntity.status(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(new Response("Operação realizada com sucesso!"));
     }
 }

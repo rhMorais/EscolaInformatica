@@ -31,9 +31,7 @@ public class ProfessorController {
 
     @PostMapping
     public ResponseEntity<Professor> save(@RequestBody Professor professor){
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(professorBusiness.save(professor));
+        return ResponseEntity.status(HttpStatus.CREATED).body(professorBusiness.save(professor));
     }
 
     @PutMapping("/{id}")
@@ -44,6 +42,6 @@ public class ProfessorController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Integer id){
         professorBusiness.delete(id);
-        return ResponseEntity.status(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(new Response("Operação realizada com sucesso!"));
     }
 }

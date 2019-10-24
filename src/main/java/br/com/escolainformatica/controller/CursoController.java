@@ -32,9 +32,7 @@ public class CursoController {
 
     @PostMapping
     public ResponseEntity<Curso> save(@RequestBody Curso curso){
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(cursoBusiness.save(curso));
+        return ResponseEntity.status(HttpStatus.CREATED).body(cursoBusiness.save(curso));
     }
 
     @PutMapping("/{id}")
@@ -45,20 +43,16 @@ public class CursoController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Integer id){
         cursoBusiness.delete(id);
-        return ResponseEntity.status(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(new Response("Operação realizada com sucesso!"));
     }
 
     @PostMapping("/{id}/materias")
     public ResponseEntity<List<Materia>> addMateria(@PathVariable Integer id, @RequestBody Materia materia){
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(cursoBusiness.addMateria(id, materia));
+        return ResponseEntity.status(HttpStatus.CREATED).body(cursoBusiness.addMateria(id, materia));
     }
 
     @DeleteMapping("/{idCurso}/materias/{idMateria}")
     public ResponseEntity<List<Materia>> removeMateria(@PathVariable Integer idCurso, @PathVariable Integer idMateria){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(cursoBusiness.removeMateria(idCurso, idMateria));
+        return ResponseEntity.status(HttpStatus.OK).body(cursoBusiness.removeMateria(idCurso, idMateria));
     }
 }

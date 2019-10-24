@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 @Entity
 @Table
 public class Aluno implements Serializable {
@@ -26,13 +27,13 @@ public class Aluno implements Serializable {
     private Date data_nascimento;
 
     @Column(nullable = false)
-    private double cpf;
+    private Long cpf;
 
     @ManyToMany(mappedBy = "alunos")
     @JsonIgnore
     private List<Turma> turmas;
 
-    public Aluno(Integer id, String nome, Date data_nascimento, double cpf) {
+    public Aluno(Integer id, String nome, Date data_nascimento, Long cpf) {
         this.id = id;
         this.nome = nome;
         this.data_nascimento = data_nascimento;
@@ -66,11 +67,11 @@ public class Aluno implements Serializable {
         this.data_nascimento = data_nascimento;
     }
 
-    public double getCpf() {
+    public Long getCpf() {
         return cpf;
     }
 
-    public void setCpf(double cpf) {
+    public void setCpf(Long cpf) {
         this.cpf = cpf;
     }
 

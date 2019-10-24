@@ -19,9 +19,7 @@ public class Materia implements Serializable {
     private String descricao;
 
     @ManyToOne
-    @JoinColumn(name="id_professor",
-                foreignKey = @ForeignKey(name = "Professor_Materia_FK"),
-                nullable = false)
+    @JoinColumn(name="id_professor", nullable = false)
     private Professor professor;
 
     @ManyToMany(mappedBy = "materias")

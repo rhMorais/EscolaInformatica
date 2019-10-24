@@ -2,6 +2,7 @@ package br.com.escolainformatica.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,8 +23,9 @@ public class Turma implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "aluno_turmas",
-            joinColumns = @JoinColumn(name = "id_aluno"),
-            inverseJoinColumns = @JoinColumn(name = "id_turma"))
+            joinColumns = @JoinColumn(name = "id_turma"),
+            inverseJoinColumns = @JoinColumn(name = "id_aluno"))
+    @OrderBy("nome ASC")
     private List<Aluno> alunos;
 
     public Turma() {

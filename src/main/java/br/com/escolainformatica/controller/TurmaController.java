@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/v1/turmas")
 public class TurmaController {
@@ -30,9 +32,7 @@ public class TurmaController {
 
     @PostMapping
     public ResponseEntity<Turma> save(@RequestBody Turma turma){
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(turmaBusiness.save(turma));
+        return ResponseEntity.status(HttpStatus.CREATED).body(turmaBusiness.save(turma));
     }
 
     @PutMapping("/{id}")
@@ -41,22 +41,18 @@ public class TurmaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Integer id){
+    public ResponseEntity<Response> delete(@PathVariable Integer id){
         turmaBusiness.delete(id);
-        return ResponseEntity.status(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(new Response("Operação realizada com sucesso!"));
     }
 
     @PostMapping("/{id}/alunos")
     public ResponseEntity<List<Aluno>> addAlunos(@PathVariable Integer id, @RequestBody List<Aluno> alunos){
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(turmaBusiness.addAlunos(id, alunos));
+        return ResponseEntity.status(HttpStatus.CREATED).body(turmaBusiness.addAlunos(id, alunos));
     }
 
     @DeleteMapping("/{idTurma}/alunos/{idAluno}")
     public ResponseEntity<List<Aluno>> removeAluno(@PathVariable Integer idTurma, @PathVariable Integer idAluno){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(turmaBusiness.removeAluno(idTurma, idAluno));
+        return ResponseEntity.status(HttpStatus.OK).body(turmaBusiness.removeAluno(idTurma, idAluno));
     }
 }

@@ -32,9 +32,7 @@ public class MateriaBusinessImpl implements MateriaBusiness {
 
     @Override
     public Materia findOne(Integer id) {
-        if (!materiaRepository.existsById(id))
-            throw new NotFoundException();
-
+        materiaValidate(id);
         return materiaRepository.findById(id).get();
     }
 
@@ -46,11 +44,8 @@ public class MateriaBusinessImpl implements MateriaBusiness {
 
     @Override
     public Materia save(Integer id, Materia materia) {
-        if (!materiaRepository.existsById(id))
-            throw new NotFoundException();
-
+        materiaValidate(id);
         validaProfessor(materia.getProfessor());
-
         materia.setId(id);
         return materiaRepository.save(materia);
     }
@@ -58,6 +53,11 @@ public class MateriaBusinessImpl implements MateriaBusiness {
     @Override
     public void delete(Integer id) {
         materiaRepository.deleteById(id);
+    }
+
+    private void materiaValidate(Integer id){
+        if (!materiaRepository.existsById(id))
+            throw new NotFoundException("Matéria");
     }
 
     private void validaProfessor(Professor professor){

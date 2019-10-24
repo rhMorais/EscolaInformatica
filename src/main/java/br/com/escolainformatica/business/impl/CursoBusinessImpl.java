@@ -2,6 +2,7 @@ package br.com.escolainformatica.business.impl;
 
 import br.com.escolainformatica.business.CursoBusiness;
 import br.com.escolainformatica.business.MateriaBusiness;
+import br.com.escolainformatica.exception.MateriasNotFoundException;
 import br.com.escolainformatica.exception.NotFoundException;
 import br.com.escolainformatica.model.Curso;
 import br.com.escolainformatica.model.Materia;
@@ -29,28 +30,28 @@ public class CursoBusinessImpl implements CursoBusiness {
 
     @Override
     public Curso findOne(Integer id) {
-        if (!cursoRepository.existsById(id))
-            throw new NotFoundException();
-
+        cursoValidate(id);
         return cursoRepository.findById(id).get();
     }
 
     @Override
     public Curso save(Curso curso) {
+        if (curso.getMaterias() == null || curso.getMaterias().isEmpty())
+            throw new MateriasNotFoundException();
+
         return cursoRepository.save(curso);
     }
 
     @Override
     public Curso save(Integer id, Curso curso) {
-        if (!cursoRepository.existsById(id))
-            throw new NotFoundException();
-
+        cursoValidate(id);
         curso.setId(id);
         return cursoRepository.save(curso);
     }
 
     @Override
     public void delete(Integer id) {
+        cursoValidate(id);
         cursoRepository.deleteById(id);
     }
 
@@ -68,5 +69,10 @@ public class CursoBusinessImpl implements CursoBusiness {
         Materia materia = materiaBusiness.findOne(idMateria);
         curso.removeMateria(materia);
         return cursoRepository.save(curso).getMaterias();
+    }
+
+    private void cursoValidate(Integer id){
+        if (!cursoRepository.existsById(id))
+            throw new NotFoundException("Curso");
     }
 }

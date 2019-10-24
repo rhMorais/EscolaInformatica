@@ -1,4 +1,6 @@
 
+Link com documentação da api:
+    https://documenter.getpostman.com/view/2764812/SVzxXyvK?version=latest#8d91a3cf-6d14-44a8-b9e2-61ac99e58e0a
 
 Contrato classes
 
@@ -31,6 +33,11 @@ Contrato classes
 		string periodo,
 		Curso curso,
 		List<Aluno> alunos
+	}
+
+	AlunoTurma {
+	    Aluno aluno,
+	    Turma turma
 	}
 	
 	

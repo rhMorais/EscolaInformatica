@@ -32,9 +32,7 @@ public class MateriaController {
 
     @PostMapping
     public ResponseEntity<Materia> save(@RequestBody Materia materia){
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(materiaBusiness.save(materia));
+        return ResponseEntity.status(HttpStatus.CREATED).body(materiaBusiness.save(materia));
     }
 
     @PutMapping("/{id}")
@@ -45,6 +43,6 @@ public class MateriaController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Integer id){
         materiaBusiness.delete(id);
-        return ResponseEntity.status(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(new Response("Operação realizada com sucesso!"));
     }
 }

@@ -29,9 +29,7 @@ public class TurmaBusinessImpl implements TurmaBusiness {
 
     @Override
     public Turma findOne(Integer id) {
-        if (!turmaRepository.existsById(id))
-            throw new NotFoundException();
-
+        turmaValidate(id);
         return turmaRepository.findById(id).get();
     }
 
@@ -42,9 +40,7 @@ public class TurmaBusinessImpl implements TurmaBusiness {
 
     @Override
     public Turma save(Integer id, Turma turma) {
-        if (!turmaRepository.existsById(id))
-            throw new NotFoundException();
-
+        turmaValidate(id);
         turma.setId(id);
         return turmaRepository.save(turma);
     }
@@ -72,5 +68,10 @@ public class TurmaBusinessImpl implements TurmaBusiness {
         Aluno aluno = alunoBusiness.findOne(idAluno);
         turma.removeAluno(aluno);
         return turmaRepository.save(turma).getAlunos();
+    }
+
+    private void turmaValidate(Integer id){
+        if (!turmaRepository.existsById(id))
+            throw new NotFoundException("Turma");
     }
 }
